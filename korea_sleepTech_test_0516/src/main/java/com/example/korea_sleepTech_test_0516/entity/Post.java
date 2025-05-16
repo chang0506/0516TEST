@@ -1,10 +1,7 @@
 package com.example.korea_sleepTech_test_0516.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "posts")
@@ -12,13 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-/*
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(100) NOT NULL,
-    content TEXT NOT NULL,
-    author_id BIGINT NOT NULL,
-    FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE CASCADE
- */
+@Builder
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,8 +21,7 @@ public class Post {
     @Column(name = "content", nullable = false)
     private String contnet;
 
-
-
-
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="author_id", nullable = false)
+    private User author;
 }

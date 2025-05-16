@@ -94,7 +94,7 @@ public class AuthServiceImpl implements AuthService {
         // 사용자 정보의 권한 정보를 호출
         String role = user.getRole();
 
-        String token = jwtProvider.generateJwtToken(username, role); // username에 email 저장
+        String token = jwtProvider.generateJwtToken(username, role);
 
         data = new UserLogInResDto(token, user, exprTime);
         return ResponseDto.setSuccess(ResponseMessage.SUCCESS, data);

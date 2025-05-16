@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 
 /*
  * === JwtAuthenticationFilter ===
@@ -86,10 +89,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
      *       , 컨트롤러의 메서드에 주입시킬 수 있음 (@AuthenticationPrincipal)
      * */
     private void setAuthenticationContext(HttpServletRequest request, String username, String role) {
+
+        List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_" + role));
         // 사용자 ID를 바탕으로 UsernamePasswordAuthenticationToken(인증 토큰) 생성
         // : 기본 설정 - 권한 없음
         AbstractAuthenticationToken authenticationToken
-                = new UsernamePasswordAuthenticationToken(username, null, null);
+                = new UsernamePasswordAuthenticationToken(username, null, authorities);
 
         // 요청에 대한 세부 정보를 설정
         // : 생성된 인증 토큰에 요청의 세부 사항을 설정
