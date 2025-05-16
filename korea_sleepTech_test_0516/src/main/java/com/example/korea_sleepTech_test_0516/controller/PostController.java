@@ -10,7 +10,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +33,6 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.OK).body(post);
     }
 
-    @PreAuthorize("hasRole('USER')")
     @PostMapping
     public ResponseEntity<ResponseDto<PostDetailResDto>> createPost(@AuthenticationPrincipal String userName, @Valid @RequestBody PostCreateReqDto dto) {
         ResponseDto<PostDetailResDto> post = postService.createPost(userName, dto);

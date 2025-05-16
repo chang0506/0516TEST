@@ -108,7 +108,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                                 // : 특정 요청과 일치하는 url에 대한 엑세스 특정 경로에 대한 엑세스 설정
                                 .requestMatchers(new AntPathRequestMatcher("/api/auth/**")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/api/posts/**")).permitAll()// : 인증 처리 없이 접근 가능 (누구나 접근 가능 - 인증, 인가 없이 접근 가능)
+                                .requestMatchers(HttpMethod.GET, ("/api/posts/**")).permitAll()// : 인증 처리 없이 접근 가능 (누구나 접근 가능 - 인증, 인가 없이 접근 가능)
                                 .requestMatchers(HttpMethod.POST, ("/api/posts/**")).hasRole("USER")
                                 .requestMatchers(HttpMethod.POST, ("/api/notices/**")).hasRole("ADMIN")
                                 .requestMatchers("/api/users/**").hasAnyRole("ADMIN","USER")
