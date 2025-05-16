@@ -24,7 +24,6 @@ public class AuthServiceImpl implements AuthService {
 
     // 1) 회원 가입
     @Override
-    @Transactional(readOnly = true)
     public ResponseDto<UserSignUpResDto> signup(UserSignUpReqDto dto) {
         String username = dto.getUsername();
         String password = dto.getPassword();

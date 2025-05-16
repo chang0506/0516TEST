@@ -72,12 +72,6 @@ public class PostServiceImpl implements PostService {
             return ResponseDto.setFailed(ResponseMessage.NOT_EXISTS_USER);
         }
 
-//        boolean isAdim = user.getRole().equals("ADMIN");
-//
-//        if (isAdim) {
-//            throw new IllegalStateException("USER 권한을 가져야만 작성할 수 있습니다");
-//        }
-
         Post newPost = Post.builder()
                 .title(dto.getTitle())
                 .content(dto.getContent())

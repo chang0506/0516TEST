@@ -110,8 +110,8 @@ public class WebSecurityConfig {
                                 .requestMatchers(new AntPathRequestMatcher("/api/auth/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/api/posts/**")).permitAll()// : 인증 처리 없이 접근 가능 (누구나 접근 가능 - 인증, 인가 없이 접근 가능)
                                 .requestMatchers(HttpMethod.POST, ("/api/posts/**")).hasRole("USER")
-                                .requestMatchers("/api/v1/users/**").hasRole("USER")
-                                .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.POST, ("/api/notices/**")).hasRole("ADMIN")
+                                .requestMatchers("/api/users/**").hasAnyRole("ADMIN","USER")
                                 .anyRequest().authenticated()
                         // 위에서 설정한 url 이외의 요청에 대해 + 별도의 인가는 필요 X + 인증이 성공된 상태여야 접근 가능
                 )
