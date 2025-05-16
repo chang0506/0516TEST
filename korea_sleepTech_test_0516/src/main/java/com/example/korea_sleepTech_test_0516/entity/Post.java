@@ -19,9 +19,10 @@ public class Post {
     private String title;
 
     @Column(name = "content", nullable = false)
-    private String contnet;
+    private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="author_id", nullable = false)
     private User author;
+
 }
