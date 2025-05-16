@@ -5,13 +5,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Builder
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class PostDetailResDto {
+public class UserDetailResDto {
     private Long id;
-    private String title;
-    private String content;
-    private String author;
+    private String username;
+    private String role;
 }

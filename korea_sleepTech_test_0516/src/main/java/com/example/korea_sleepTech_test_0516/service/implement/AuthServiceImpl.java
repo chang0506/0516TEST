@@ -13,6 +13,7 @@ import com.example.korea_sleepTech_test_0516.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +24,7 @@ public class AuthServiceImpl implements AuthService {
 
     // 1) 회원 가입
     @Override
+    @Transactional(readOnly = true)
     public ResponseDto<UserSignUpResDto> signup(UserSignUpReqDto dto) {
         String username = dto.getUsername();
         String password = dto.getPassword();
@@ -69,6 +71,7 @@ public class AuthServiceImpl implements AuthService {
 
     // 2) 로그인
     @Override
+    @Transactional(readOnly = true)
     public ResponseDto<UserLogInResDto> login(UserLogInReqDto dto) {
         String username = dto.getUsername();
         String password = dto.getPassword();

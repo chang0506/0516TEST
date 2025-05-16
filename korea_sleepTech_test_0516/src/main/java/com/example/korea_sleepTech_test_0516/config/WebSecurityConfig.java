@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -108,7 +109,8 @@ public class WebSecurityConfig {
                                 // : 특정 요청과 일치하는 url에 대한 엑세스 특정 경로에 대한 엑세스 설정
                                 .requestMatchers(new AntPathRequestMatcher("/api/auth/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/api/posts/**")).permitAll()// : 인증 처리 없이 접근 가능 (누구나 접근 가능 - 인증, 인가 없이 접근 가능)
-                                .requestMatchers("/api/v1/user/**").hasRole("USER")
+                                .requestMatchers(HttpMethod.POST, ("/api/posts/**")).hasRole("USER")
+                                .requestMatchers("/api/v1/users/**").hasRole("USER")
                                 .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                         // 위에서 설정한 url 이외의 요청에 대해 + 별도의 인가는 필요 X + 인증이 성공된 상태여야 접근 가능
